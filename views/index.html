@@ -3,47 +3,70 @@
 {% block content %}
 
 <div class = "row">
-    <div name="map" class="col-lg-8 map"><img src="http://placehold.it/900x400" class="img-responsive"></div>
+    <div name="map" class="col-lg-8 map"><img src="http://placehold.it/1100x600" class="img-responsive"></div>
     <div name="sidebar" class="col-lg-4 sidebar">
         <div name="selectors" class="selectors">
 	        <ul class="selectorsList">
 	        	<li >	
-		            <label class="selctorsLabel" for="Hotel">Hotels</label>
-		            <select name="Hotels">
+		            <label class="selectorsLabel" for="Hotel">Hotels</label>
+		            <select style="width: 80%" name="Hotels">
 		                {% for hotel in hotels %}
-		                     <option value="value1">{{ hotel.name }}</option> 
+		                     <option>{{ hotel.name }}</option> 
 		                {% endfor %}
 		            </select>
+		            <button type="button" class="btn btn-default">+</button>
 		        </li>
 		        <li>
 		            <label class="selectorsLabel" for="Restaurant">Restaurants</label>
-		            <select name="Restaurant">
+		            <select style="width: 80%" name="Restaurant">
 		                {% for restaurant in restaurants %}
-		                     <option value="value1">{{ restaurant.name }}</option> 
+		                     <option>{{ restaurant.name }}</option> 
 		                {% endfor %}
 		            </select>
+		            <button type="button" class="btn btn-default">+</button>
 		        </li>
 		        <li>
 		            <label class="selectorsLabel" for="Things To Do">Things To Do</label>
-		            <select name="Things To Do">
+		            <select style="width: 80%" name="Things To Do">
 		                {% for thing in things %}
-		                     <option value="value1">{{ thing.name }}</option> 
+		                     <option>{{ thing.name }}</option> 
 		                {% endfor %}
 		            </select>
+		            <button type="button" class="btn btn-default">+</button>
 		        </li>
 	        </ul>    
         </div>
         <h3>{{ day }}</h3>
-        <div name="current" class="current">
-            <div name="daySelector" class="daySelector">
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>+</li>
-            </div>
-            <li>My Hotel</li>
-            <li>My Restaurants</li>
-            <li>My Things To Do</li>
+        <div name="current" class="selectors">
+        	<div class="btn-group daySelector" role="group" aria-label="...">
+ 				<button type="button" class="btn btn-default">1</button>
+ 				<button type="button" class="btn btn-default">2</button>
+ 				<button type="button" class="btn btn-default">3</button>
+ 				<button type="button" class="btn btn-default">+</button>
+			</div>
+<!--             <div name="daySelector" class="daySelector">
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>+</button>
+            </div> -->
+            <ul class="currentList">
+	            <li class="list-group-item">
+	            	<h4 class="list-group-item-heading">My Hotel</h4>
+	            	<p class="list-group-item-text inline">Temporary Item</p>
+	            	<button type="button" class="btn btn-default">-</button>
+	            </li>
+	            <li class="list-group-item">
+	            	<h4 class="list-group-item-heading">My Restaurants</h4>
+	            	<p class="list-group-item-text inline">Temporary Item</p>
+	            	<button type="button" class="btn btn-default">-</button>
+	            </li>
+	            <li class="list-group-item">
+	            	<h4 class="list-group-item-heading">My Things To Do</h4>
+	            	<p class="list-group-item-text inline">Temporary Item</p>
+	            	<button type="button" class="btn btn-default">-</button>
+	            </li>
+	        </ul>
         </div>
     </div>
 </div>

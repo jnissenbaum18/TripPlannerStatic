@@ -5,6 +5,7 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #50514F;
 }
 
 a {
@@ -16,28 +17,48 @@ a {
 }
 
 .sidebar {
-	background: #70C1B3
+	// background: #2B96C4;
+	background: #28464B;
+	border-radius: 5px;
 }
 
 .selectors {
-	background: #FFEFC9;
+	background: #326771;
 	padding: 10px;
+	border-radius: 5px;
 }
 
 .selectorsList {
 	list-style-type: none;
-	margin: 0 10px;
+	margin: 10px auto;
 	padding: 0;
 }
 
 .selectorsLabel {
 	display: block;
-	margin: 10px;
+	margin: 10px auto;
+	color: white;
+	font-size: 20px
 }
 
 .hotels {
 
 }
+
+.daySelector {
+	margin: 10px;
+}
+
+.currentList {
+	list-style-type: none;
+	padding: 0;
+}
+
+.inline {
+	display: inline;
+}
+
+
 
 @media (min-width: 0px) {
  @for $i from 1 through 12 {
