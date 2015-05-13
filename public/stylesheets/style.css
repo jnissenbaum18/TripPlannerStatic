@@ -1,9 +1,28 @@
+* {
+  box-sizing: border-box; }
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 a {
   color: #00B7FF; }
+
+.sidebar {
+  background: #70C1B3; }
+
+.selectors {
+  background: #FFEFC9;
+  padding: 10px; }
+
+.selectorsList {
+  list-style-type: none;
+  margin: 0 10px;
+  padding: 0; }
+
+.selectorsLabel {
+  display: block;
+  margin: 10px; }
 
 @media (min-width: 0px) {
   .col-sm-1 {
