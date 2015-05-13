@@ -23,3 +23,22 @@ function initialize_gmaps() {
 $(document).ready(function() {
     initialize_gmaps();
 });
+
+$('#hotelButton').click(function() {
+    var selected = $('#hotelSelect :selected').val();
+
+    // console.log($('#hotelValue').val());
+    $('#hotelList').append('<p class="list-group-item-text inline">' + selected + '</p>' + '<button type="button" class="btn btn-default">-</button>');
+});
+
+
+
+// $('.selectorButton').click(function() {
+//     console.log($(this).siblings('select').val());
+//     var selected = $(this).siblings('select').val());
+//     console.log(selected);
+
+//     var divToAppendTo = $(this.)
+//     // console.log($('#hotelValue').val());
+//     $('th').append('<p class="list-group-item-text inline">' + selected + '</p>' + '<button type="button" class="btn btn-default">-</button>');
+// });

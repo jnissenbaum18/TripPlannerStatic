@@ -12,30 +12,30 @@
 	        <ul class="selectorsList">
 	        	<li >	
 		            <label class="selectorsLabel" for="Hotel">Hotels</label>
-		            <select class="dropDown" name="Hotels">
+		            <select id="hotelSelect" class="dropDown" name="Hotels">
 		                {% for hotel in hotels %}
-		                     <option>{{ hotel.name }}</option> 
+		                     <option  value="{{ hotel.name }}">{{ hotel.name }}</option> 
 		                {% endfor %}
 		            </select>
-		            <button type="button" class="btn btn-default">+</button>
+		            <button type="button" class="btn btn-default selectorButton" id="hotelButton">+</button>
 		        </li>
 		        <li>
 		            <label class="selectorsLabel" for="Restaurant">Restaurants</label>
 		            <select class="dropDown" name="Restaurant">
 		                {% for restaurant in restaurants %}
-		                     <option>{{ restaurant.name }}</option> 
+		                     <option value="{{ restaurant.name }}">{{ restaurant.name }}</option> 
 		                {% endfor %}
 		            </select>
-		            <button type="button" class="btn btn-default">+</button>
+		            <button type="button" class="btn btn-default selectorButton" id="restButton">+</button>
 		        </li>
 		        <li>
 		            <label class="selectorsLabel" for="Things To Do">Things To Do</label>
 		            <select class="dropDown" name="Things To Do">
 		                {% for thing in things %}
-		                     <option>{{ thing.name }}</option> 
+		                     <option value="{{ thing.name }}">{{ thing.name }}</option> 
 		                {% endfor %}
 		            </select>
-		            <button type="button" class="btn btn-default">+</button>
+		            <button type="button" class="btn btn-default selectorButton" id="thingButton">+</button>
 		        </li>
 	        </ul>    
         </div>
@@ -54,10 +54,10 @@
                 <button>+</button>
             </div> -->
             <ul class="currentList">
-	            <li class="list-group-item">
+	            <li id="hotelList" class="list-group-item">
 	            	<h4 class="list-group-item-heading">My Hotel</h4>
-	            	<p class="list-group-item-text inline">Temporary Item</p>
-	            	<button type="button" class="btn btn-default">-</button>
+<!-- 	            	<p class="list-group-item-text inline">Temporary Item</p>
+	            	<button type="button" class="btn btn-default">-</button> -->
 	            </li>
 	            <li class="list-group-item">
 	            	<h4 class="list-group-item-heading">My Restaurants</h4>
