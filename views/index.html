@@ -1,6 +1,45 @@
 {% extends "layout.html" %}
 
 {% block content %}
+
+<div class = "row">
+    <div name="map" class="col-lg-8 map"><img src="http://placehold.it/900x400" class="img-responsive"></div>
+    <div name="sidebar" class="col-lg-4 sidebar">
+        <div name="selectors" class="selectors">
+            <label for="Hotel">Hotels</label>
+            <select name="Hotels">
+                {% for hotel in hotels %}
+                     <option value="value1">{{ hotel.name }}</option> 
+                {% endfor %}
+            </select>
+            <label for="Restaurant">Restaurants</label>
+            <select name="Restaurant">
+                {% for restaurant in restaurants %}
+                     <option value="value1">{{ restaurant.name }}</option> 
+                {% endfor %}
+            </select>
+            <label for="Things To Do">Things To Do</label>
+            <select name="Things To Do">
+                {% for thing in things %}
+                     <option value="value1">{{ thing.name }}</option> 
+                {% endfor %}
+            </select>
+        </div>
+        <h3>{{ day }}</h3>
+        <div name="current" class="current">
+            <div name="daySelector" class="daySelector">
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>+</li>
+            </div>
+            <li>My Hotel</li>
+            <li>My Restaurants</li>
+            <li>My Things To Do</li>
+        </div>
+    </div>
+</div>
+<!-- 
     <h3>{{title}}</h3>
     <hr>
     <label for="Hotel">Hotels</label>
@@ -21,7 +60,7 @@
     		 <option value="value1">{{ thing.name }}</option> 
     	{% endfor %}
 	</select>
-
+ -->
 
 <!--     <ul class="list-unstyled">
     	{% for hotel in hotels %}

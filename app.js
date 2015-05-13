@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 var sass = require('node-sass-middleware');
 var cookieParser = require('cookie-parser');
 var debug = require('debug');
+// var bower = require('bower');
 
 
 var routes = require('./routes/index');
@@ -34,7 +35,9 @@ app.use(
     debug: true
   })
 );
+app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use('/', routes);
 app.use('/users', users);
