@@ -9,6 +9,9 @@ body {
 a {
   color: #00B7FF; }
 
+.map {
+  height: 100vh; }
+
 .sidebar {
   background: #28464B;
   border-radius: 5px; }
