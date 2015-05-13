@@ -12,7 +12,7 @@
 	        <ul class="selectorsList">
 	        	<li >	
 		            <label class="selectorsLabel" for="Hotel">Hotels</label>
-		            <select style="width: 80%" name="Hotels">
+		            <select class="dropDown" name="Hotels">
 		                {% for hotel in hotels %}
 		                     <option>{{ hotel.name }}</option> 
 		                {% endfor %}
@@ -21,7 +21,7 @@
 		        </li>
 		        <li>
 		            <label class="selectorsLabel" for="Restaurant">Restaurants</label>
-		            <select style="width: 80%" name="Restaurant">
+		            <select class="dropDown" name="Restaurant">
 		                {% for restaurant in restaurants %}
 		                     <option>{{ restaurant.name }}</option> 
 		                {% endfor %}
@@ -30,7 +30,7 @@
 		        </li>
 		        <li>
 		            <label class="selectorsLabel" for="Things To Do">Things To Do</label>
-		            <select style="width: 80%" name="Things To Do">
+		            <select class="dropDown" name="Things To Do">
 		                {% for thing in things %}
 		                     <option>{{ thing.name }}</option> 
 		                {% endfor %}
@@ -39,7 +39,7 @@
 		        </li>
 	        </ul>    
         </div>
-        <h3>{{ day }}</h3>
+        <h3>Day 1{{ day }}</h3>
         <div name="current" class="selectors">
         	<div class="btn-group daySelector" role="group" aria-label="...">
  				<button type="button" class="btn btn-default">1</button>
