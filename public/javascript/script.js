@@ -35,7 +35,7 @@ $('#hotelButton').click(function() {
 
 $('.selectorButton').click(function() {
     console.log($(this).siblings('select').val());
-    var selected = $(this).siblings('select').val());
+    // var selected = $(this).siblings('select').val());
     console.log(selected);
 
     var divToAppendTo = $(this).siblings('select').attr("name");
@@ -43,3 +43,28 @@ $('.selectorButton').click(function() {
     // console.log($('#hotelValue').val());
     $('th').append('<p class="list-group-item-text inline">' + selected + '</p>' + '<button type="button" class="btn btn-default">-</button>');
 });
+
+
+// add click event handlers to the add buttons 
+
+// add click event handlers to the subtract buttons 
+
+// Add a day
+
+// Days should switch
+
+// Remove a day
+
+// add new markers to the map
+
+// when an empty day is clicked, it zooms out
+
+// when you add a new hotel/restaurant/things/, map zooms out to encompass all new listings
+
+
+
+
+
+
+
+
