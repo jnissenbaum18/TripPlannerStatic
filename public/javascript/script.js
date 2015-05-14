@@ -33,12 +33,13 @@ $('#hotelButton').click(function() {
 
 
 
-// $('.selectorButton').click(function() {
-//     console.log($(this).siblings('select').val());
-//     var selected = $(this).siblings('select').val());
-//     console.log(selected);
+$('.selectorButton').click(function() {
+    console.log($(this).siblings('select').val());
+    var selected = $(this).siblings('select').val());
+    console.log(selected);
 
-//     var divToAppendTo = $(this.)
-//     // console.log($('#hotelValue').val());
-//     $('th').append('<p class="list-group-item-text inline">' + selected + '</p>' + '<button type="button" class="btn btn-default">-</button>');
-// });
+    var divToAppendTo = $(this).siblings('select').attr("name");
+    
+    // console.log($('#hotelValue').val());
+    $('th').append('<p class="list-group-item-text inline">' + selected + '</p>' + '<button type="button" class="btn btn-default">-</button>');
+});

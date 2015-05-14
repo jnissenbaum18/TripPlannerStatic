@@ -24,7 +24,7 @@ app.set('views', path.join(__dirname, '/views'));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
+app.use(logger('dev')); // a development logger, will give a diff output if it was a diff loger.
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -39,7 +39,7 @@ app.use('/bower_components', express.static(path.join(__dirname, 'bower_componen
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use('/', routes);
+app.use('/', routes); // what returns from this middleware? a function with req, res, and next, object, and a router object function middleare. We're exporting a router, a router is middleware, and we're requiring that middleware
 app.use('/users', users);
 
 // catch 404 and forward to error handler
