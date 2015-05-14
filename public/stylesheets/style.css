@@ -50,6 +50,10 @@ a {
 .inline {
   display: inline; }
 
+.itineraryListItem {
+  width: 80%;
+  float: left; }
+
 @media (min-width: 0px) {
   .col-sm-1 {
     float: left;

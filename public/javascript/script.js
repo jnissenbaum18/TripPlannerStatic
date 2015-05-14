@@ -24,25 +24,61 @@ $(document).ready(function() {
     initialize_gmaps();
 });
 
-$('#hotelButton').click(function() {
-    var selected = $('#hotelSelect :selected').val();
-
-    // console.log($('#hotelValue').val());
-    $('#hotelList').append('<p class="list-group-item-text inline">' + selected + '</p>' + '<button type="button" class="btn btn-default">-</button>');
-});
-
-
-
-$('.selectorButton').click(function() {
-    console.log($(this).siblings('select').val());
-    // var selected = $(this).siblings('select').val());
-    console.log(selected);
-
-    var divToAppendTo = $(this).siblings('select').attr("name");
+$('#hotelButton').on('click', function() {
+    var selected = $('#hotelSelect :selected').val().split(',');
+    console.log(selected[0])
+    console.log(selected[1])
+    console.log(selected[2])
+    var hotelButton = $('<button type="button" class="btn btn-default subtract">-</button>')
+    var hotelText = $('<div style="margin-top: 10px"> <div class="list-group-item-text itineraryListItem">' + selected + '</div>' + '</div>')
     
-    // console.log($('#hotelValue').val());
-    $('th').append('<p class="list-group-item-text inline">' + selected + '</p>' + '<button type="button" class="btn btn-default">-</button>');
+
+
+    // myLatlng = new google.maps.LatLang(location)
+    
+
+
+    $('#hotelList').append(hotelText).append(hotelButton);
+    hotelButton.on('click', function () {
+        hotelText.remove()
+        hotelButton.remove()
+    })
 });
+
+$('#restButton').click(function() {
+    var selected = $('#restaurantSelect :selected').val();
+    var restButton = $('<button type="button" class="btn btn-default subtract">-</button>')
+    var restText = $('<div style="margin-top: 10px"><div class="list-group-item-text itineraryListItem">' + selected + '</div>' + '</div>')
+    $('#restaurantList').append(restText).append(restButton);
+    restButton.on('click', function () {
+        restText.remove()
+        restButton.remove()
+    })
+});
+
+$('#thingButton').click(function() {
+    var selected = $('#thingsToDoSelect :selected').val();
+    var thingsButton = $('<button type="button" class="btn btn-default subtract">-</button>')
+    var thingsText = $('<div style="margin-top: 10px"><div class="list-group-item-text itineraryListItem">' + selected + '</div>' + '</div>')
+    $('#thingsToDoList').append(thingsText).append(thingsButton);
+    thingsButton.on('click', function () {
+        thingsText.remove()
+        thingsButton.remove()
+    })
+});
+
+
+
+// $('.selectorButton').click(function() {
+//     console.log($(this).siblings('select').val());
+//     // var selected = $(this).siblings('select').val());
+//     console.log(selected);
+
+//     var divToAppendTo = $(this).siblings('select').attr("name");
+    
+//     // console.log($('#hotelValue').val());
+//     $('th').append('<p class="list-group-item-text inline">' + selected + '</p>' + '<button type="button" class="btn btn-default">-</button>');
+// });
 
 
 // add click event handlers to the add buttons 
