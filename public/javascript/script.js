@@ -34,88 +34,42 @@ $(document).ready(function() {
     initialize_gmaps();
 });
 
-var hotelPut = function(selected) {
-    // var selected = $('#hotelSelect :selected').val().split(',');
+var buttonMaker = function (value, element) {
 
-    var hotelButton = $('<button type="button" class="btn btn-default subtract">-</button>');
-    var hotelText = $('<div style="margin-top: 10px" class="subtract"> <div class="list-group-item-text itineraryListItem subtract">' + selected[0] + '</div>' + '</div>');
-    var location = new google.maps.LatLng(selected[1],selected[2]);
+    var button = $('<button type="button" class="btn btn-default subtract">-</button>');
+    var text = $('<div style="margin-top: 10px" class="subtract"> <div class="list-group-item-text itineraryListItem subtract">' + value[0] + '</div>' + '</div>');
+ 
+    // var location = new google.maps.LatLng(value[1],value[2]);
+    // var marker = new google.maps.Marker({
+    //     position: location
+    // });
+    // marker.setMap(map);
 
-    var marker = new google.maps.Marker({
-        position: location
-    });
-
-    marker.setMap(map);
-
-    itineraries[currentDay-1].hotels.push([selected[0],'','']);
-
-
-    $('#hotelList').append(hotelText).append(hotelButton);
-    hotelButton.on('click', function () {
-        hotelText.remove()
-        hotelButton.remove()
+    $(element).append(text).append(button);
+    button.on('click', function () {
+        text.remove()
+        button.remove()
         marker.setMap(null);
     })
 }
 
 $('#hotelButton').on('click', function () {
-    hotelPut($('#hotelSelect :selected').val().split(','))
+    var hotelInfo = $('#hotelSelect :selected').val().split(',')
+    buttonMaker(hotelInfo, '#hotelList')
+    itineraries[currentDay-1].hotels.push(hotelInfo);
 });
 
-var restaurantPut = function (selected) {
-    var restButton = $('<button type="button" class="btn btn-default subtract">-</button>')
-    var restText = $('<div style="margin-top: 10px" class="subtract"><div class="list-group-item-text itineraryListItem subtract">' + selected[0] + '</div>' + '</div>');
-
-    var location = new google.maps.LatLng(selected[1],selected[2]) 
-    var marker = new google.maps.Marker({
-        position: location,
-        icon: {
-            path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-            scale: 5
-        }
-    });
-
-    marker.setMap(map);
-    itineraries[currentDay-1].restaurants.push([selected[0],'','']);
-
-    $('#restaurantList').append(restText).append(restButton);
-    restButton.on('click', function () {
-        restText.remove();
-        restButton.remove();
-        marker.setMap(null);
-    })
-}
 $('#restButton').click(function() {
-    restaurantPut($('#restaurantSelect :selected').val().split(','))
+    var restaurantInfo = $('#restaurantSelect :selected').val().split(',')
+    buttonMaker(restaurantInfo, '#restaurantList')
+    itineraries[currentDay-1].restaurants.push(restaurantInfo);
 });
-
-var thingsPut = function (selected) {
-    var thingsButton = $('<button type="button" class="btn btn-default subtract">-</button>')
-    var thingsText = $('<div style="margin-top: 10px" class="subtract"><div class="list-group-item-text itineraryListItem subtract">' + selected[0] + '</div>' + '</div>');
-    var location = new google.maps.LatLng(selected[1],selected[2]);
-    var marker = new google.maps.Marker({
-        position: location,
-        icon: {
-            path: google.maps.SymbolPath.BACKWARD_OPEN_ARROW,
-            scale: 5
-        }
-    });
-
-    marker.setMap(map);
-    itineraries[currentDay-1].thingsToDo.push([selected[0],'','']);
-
-    $('#thingsToDoList').append(thingsText).append(thingsButton);
-    thingsButton.on('click', function () {
-        thingsText.remove();
-        thingsButton.remove();
-        marker.setMap(null);
-    })
-}
 
 $('#thingButton').click(function() {
-    thingsPut(selected = $('#thingsToDoSelect :selected').val().split(','));
+    thingsInfo = $('#thingsToDoSelect :selected').val().split(',');
+    buttonMaker(thingsInfo, '#thingsToDoList')
+    itineraries[currentDay-1].thingsToDo.push(thingsInfo);
 });
-
 
 // create object that stores an iternary for each day
 
@@ -141,14 +95,13 @@ $('#addDay').on('click', function() {
         $('.subtract').remove();
         currentDay = this.value
         itineraries[currentDay - 1].hotels.forEach(function(hotel) {
-            console.log(hotel)
-           hotelPut(hotel); 
+            buttonMaker(hotel, '#hotelList'); 
         })
         itineraries[currentDay - 1].restaurants.forEach(function(restaurant) {
-            restaurantPut(restaurant)
+            buttonMaker(restaurant, '#restaurantList')
         })
         itineraries[currentDay - 1].thingsToDo.forEach(function(thing) {
-            thingsPut(thing)
+            buttonMaker(thing, '#thingsToDoList')
         })
     })
 });
