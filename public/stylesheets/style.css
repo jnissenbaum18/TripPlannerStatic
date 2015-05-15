@@ -8,7 +8,8 @@ body {
   body h3 {
     color: white;
     font-weight: bold;
-    text-align: center; }
+    text-align: right;
+    line-height: 50%; }
 
 a {
   color: #00B7FF; }
