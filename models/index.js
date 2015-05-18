@@ -38,16 +38,18 @@ var daySchema = new mongoose.Schema({
   hotel: {type: mongoose.Schema.Types.ObjectId, ref: 'Hotel'},
   restaurants: [{type: mongoose.Schema.Types.ObjectId, ref: 'Restaurant'}],
   thingsToDo: [{type: mongoose.Schema.Types.ObjectId, ref: 'ThingToDo'}]
-})
+});
 
 var Place = mongoose.model('Place', placeSchema);
 var Hotel = mongoose.model('Hotel', hotelSchema);
 var ThingToDo = mongoose.model('ThingToDo', thingToDoSchema);
 var Restaurant = mongoose.model('Restaurant', restaurantSchema);
+var Day = mongoose.model('Day', daySchema);
 
 module.exports = {
   Place: Place,
   Hotel: Hotel,
   ThingToDo: ThingToDo,
-  Restaurant: Restaurant
+  Restaurant: Restaurant,
+  Day: Day
 };

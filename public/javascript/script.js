@@ -1,9 +1,10 @@
 var map;
 var mapOptions;
-var currentDay = 1
+// var currentDay = 1
+var currentDay = 1;
 var itineraries = [
     {
-        hotels: [],
+        hotel: [],
         restaurants: [],
         thingsToDo: [],
         markers: []
@@ -12,6 +13,7 @@ var itineraries = [
 var bounds = new google.maps.LatLngBounds();
 var marker
 
+var currentDayId;
 
 function initialize_gmaps() {
     // initialize new google maps LatLng object
@@ -37,6 +39,11 @@ function initialize_gmaps() {
 $(document).ready(function() {
     initialize_gmaps();
 
+    $.get('/', function(data) {
+     
+        $('')
+    });
+
 });
 
 var buttonMaker = function (value, element) {
@@ -44,15 +51,10 @@ var buttonMaker = function (value, element) {
     var button = $('<button type="button" value="'+element+'" class="btn btn-default subtract">-</button>');
     var text = $('<div style="margin-top: 10px" class="subtract"> <div class="list-group-item-text itineraryListItem subtract">' + value[0] + '</div>' + '</div>');
 
-    
-
-// delete item click event
-    $(element).append(text).append(button);
-    button.on('click', function () {
-        var el = this.value.slice(1,2)
+    var el = element.slice(1,2)
         // var el = element
         if (el === 'h') {
-            var ele = 'hotels'
+            var ele = 'hotel'
         }
         else if (el === 'r') {
             var ele = 'restaurants'
@@ -60,6 +62,40 @@ var buttonMaker = function (value, element) {
         else if (el ==='t') {
             var ele = 'thingsToDo'
         }
+
+        console.log('first', currentDayId, ele)
+
+    $.ajax({
+    type: 'POST',
+    url: '/days/' + currentDayId + '/' + ele,
+    // data: 'key=value&key1=value&kay2=value',//{ ele: value[0]
+          //   },
+    data: { ele: value[0],
+        _id: currentDayId
+    },
+    success: function(responseData) {
+        console.log('second ', responseData)
+        }
+
+    });
+
+// delete item click event
+    $(element).append(text).append(button);
+    button.on('click', function () {
+
+        var el = this.value.slice(1,2)
+        // var el = element
+        if (el === 'h') {
+            var ele = 'hotel'
+        }
+        else if (el === 'r') {
+            var ele = 'restaurants'
+        }
+        else if (el ==='t') {
+            var ele = 'thingsToDo'
+        }
+
+
 
         var items = itineraries[currentDay-1][ele];
 
@@ -112,7 +148,6 @@ var markerMaker = function (value, element) {
     });
 
     marker.setMap(map);
-    console.log("markers array:" + itineraries[currentDay-1].markers);
     itineraries[currentDay-1].markers.push(marker); // store marker in day
 
     bounds = new google.maps.LatLngBounds();
@@ -170,12 +205,13 @@ $('#firstDay').on('click', function() {
 
 // give functionality to our + button 
 
-$('#addDay').on('click', function() {
+$('#addDay').on('click', function() { // click on + button
      // create a new day in our object
     for (var i = 0; i < itineraries[currentDay -1].markers.length; i++) {
             itineraries[currentDay -1].markers[i].setMap(null);
     }
      currentDay = itineraries.length + 1;
+
      $('#day').text("Day " + currentDay);
 
      var newDay = {
@@ -185,6 +221,23 @@ $('#addDay').on('click', function() {
         markers: []
      };
     itineraries.push(newDay);
+
+    // if (currentDay === 1) {
+    //    currentDay = currentDay
+    // } else {
+          // currentDay++;
+    // }
+  
+
+    $.ajax({
+        type: 'POST',
+        url: '/days',
+        data: { day: currentDay
+                 },
+        success: function(responseData) {
+            currentDayId = responseData._id;
+        }
+    });
 
     $('.subtract').remove();
     var newDayButton = $('<button value="' + currentDay + '"type="button" class="btn btn-default">' + currentDay + '</button>');
@@ -198,19 +251,27 @@ $('#addDay').on('click', function() {
 
         currentDay = this.value;
         $('#day').text("Day " + currentDay);
-        itineraries[currentDay - 1].hotels.forEach(function(hotel) {
-            buttonMaker(hotel, '#hList'); 
-            markerMaker(hotel, '#hList')
-        })
-        itineraries[currentDay - 1].restaurants.forEach(function(restaurant) {
-            buttonMaker(restaurant, '#rList')
-            markerMaker(restaurant, '#rList')
-        })
-        itineraries[currentDay - 1].thingsToDo.forEach(function(thing) {
-            buttonMaker(thing, '#tList')
-            markerMaker(thing, '#tList')
+        $.ajax({
+            type: 'GET',
+            url: '/days/' + currentDayId,
+            data: { day: currentDayId },
+            success: function(responseData) {
+                console.log("responseData: ", responseData);
+            }
         })
     })
+        // itineraries[currentDay - 1].hotels.forEach(function(hotel) {
+        //     buttonMaker(hotel, '#hList'); 
+        //     markerMaker(hotel, '#hList')
+        // })
+        // itineraries[currentDay - 1].restaurants.forEach(function(restaurant) {
+        //     buttonMaker(restaurant, '#rList')
+        //     markerMaker(restaurant, '#rList')
+        // })
+        // itineraries[currentDay - 1].thingsToDo.forEach(function(thing) {
+        //     buttonMaker(thing, '#tList')
+        //     markerMaker(thing, '#tList')
+        // })
 });
 
 $('#subtractDay').on('click', function() {
@@ -242,7 +303,8 @@ $('#subtractDay').on('click', function() {
      // }
 
 });
-   
+
+
 
         // each day will have 3 keys that store arrays
 
