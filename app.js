@@ -12,6 +12,7 @@ var debug = require('debug');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var days = require('./routes/days');
 
 var app = express();
 
@@ -38,9 +39,9 @@ app.use(
 app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 app.use('/', routes); // what returns from this middleware? a function with req, res, and next, object, and a router object function middleare. We're exporting a router, a router is middleware, and we're requiring that middleware
 app.use('/users', users);
+app.use('/days', days);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
