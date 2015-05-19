@@ -51,30 +51,22 @@ var buttonMaker = function (value, element) {
     var button = $('<button type="button" value="'+element+'" class="btn btn-default subtract">-</button>');
     var text = $('<div style="margin-top: 10px" class="subtract"> <div class="list-group-item-text itineraryListItem subtract">' + value[0] + '</div>' + '</div>');
 
-    var el = element.slice(1,2)
-        // var el = element
-        if (el === 'h') {
-            var ele = 'hotel'
-        }
-        else if (el === 'r') {
-            var ele = 'restaurants'
-        }
-        else if (el ==='t') {
-            var ele = 'thingsToDo'
-        }
-
-        console.log('first', currentDayId, ele)
-
+    if (element.slice(1,2) === 'h') {
+        element = 'hotel'
+    }
+    else if (element.slice(1,2) === 'r') {
+        element = 'restaurants'
+    }
+    else if (element.slice(1,2) === 't') {
+        element = 'thingsToDo'
+    }
     $.ajax({
     type: 'POST',
-    url: '/days/' + currentDayId + '/' + ele,
-    // data: 'key=value&key1=value&kay2=value',//{ ele: value[0]
-          //   },
-    data: { ele: value[0],
+    url: '/days/' + currentDayId + '/' + element,
+    data: { element: value[0],
         _id: currentDayId
     },
     success: function(responseData) {
-        console.log('second ', responseData)
         }
 
     });
@@ -83,21 +75,7 @@ var buttonMaker = function (value, element) {
     $(element).append(text).append(button);
     button.on('click', function () {
 
-        var el = this.value.slice(1,2)
-        // var el = element
-        if (el === 'h') {
-            var ele = 'hotel'
-        }
-        else if (el === 'r') {
-            var ele = 'restaurants'
-        }
-        else if (el ==='t') {
-            var ele = 'thingsToDo'
-        }
-
-
-
-        var items = itineraries[currentDay-1][ele];
+        var items = itineraries[currentDay-1][element];
 
         for (var i = 0; i < items.length; i++) {
              if (items[i][0] === value[0]) {
@@ -118,11 +96,6 @@ var buttonMaker = function (value, element) {
                 return;
             }
         }
-
-        
-        // value[0]
-        
-
     })
 }
 
@@ -163,7 +136,7 @@ $('#hotelButton').on('click', function () {
     var hotelInfo = $('#hotelSelect :selected').val().split(',')
     buttonMaker(hotelInfo, '#hList')
     markerMaker(hotelInfo, '#hList')
-    itineraries[currentDay-1].hotels.push(hotelInfo);
+    itineraries[currentDay-1].hotel.push(hotelInfo);
 });
 
 $('#restButton').click(function() {
@@ -192,7 +165,7 @@ $('#firstDay').on('click', function() {
         currentDay = this.value
         $('#day').text("Day " + currentDay);
 
-        itineraries[currentDay - 1].hotels.forEach(function(hotel) {
+        itineraries[currentDay - 1].hotel.forEach(function(hotel) {
             buttonMaker(hotel, '#hList'); 
         })
         itineraries[currentDay - 1].restaurants.forEach(function(restaurant) {
@@ -215,7 +188,7 @@ $('#addDay').on('click', function() { // click on + button
      $('#day').text("Day " + currentDay);
 
      var newDay = {
-        hotels: [],
+        hotel: [],
         restaurants: [],
         thingsToDo: [],
         markers: []
@@ -260,32 +233,31 @@ $('#addDay').on('click', function() { // click on + button
             }
         })
     })
-        // itineraries[currentDay - 1].hotels.forEach(function(hotel) {
-        //     buttonMaker(hotel, '#hList'); 
-        //     markerMaker(hotel, '#hList')
-        // })
-        // itineraries[currentDay - 1].restaurants.forEach(function(restaurant) {
-        //     buttonMaker(restaurant, '#rList')
-        //     markerMaker(restaurant, '#rList')
-        // })
-        // itineraries[currentDay - 1].thingsToDo.forEach(function(thing) {
-        //     buttonMaker(thing, '#tList')
-        //     markerMaker(thing, '#tList')
-        // })
+        itineraries[currentDay - 1].hotel.forEach(function(hotel) {
+            buttonMaker(hotel, '#hList'); 
+            markerMaker(hotel, '#hList')
+        })
+        itineraries[currentDay - 1].restaurants.forEach(function(restaurant) {
+            buttonMaker(restaurant, '#rList')
+            markerMaker(restaurant, '#rList')
+        })
+        itineraries[currentDay - 1].thingsToDo.forEach(function(thing) {
+            buttonMaker(thing, '#tList')
+            markerMaker(thing, '#tList')
+        })
 });
 
 $('#subtractDay').on('click', function() {
      $('.subtract').remove();
-     // $('#dayButtons').
+
      $('button[value=' + currentDay + ']').remove();
      currentDay -= 1
      itineraries.splice(currentDay, 1);
      for (var i = currentDay; i < itineraries.length + 1; i++) {
         $('button[value=' + Number(i + 1) + ']').text(i).val(i);
      }
-    // currentDay = this.value;
-    // $('#day').text("Day " + currentDay);
-    itineraries[currentDay].hotels.forEach(function(hotel) {
+
+    itineraries[currentDay].hotel.forEach(function(hotel) {
         buttonMaker(hotel, '#hList'); 
         markerMaker(hotel, '#hList')
     })
@@ -297,56 +269,9 @@ $('#subtractDay').on('click', function() {
         buttonMaker(thing, '#tList')
         markerMaker(thing, '#tList')
     })
-     // $('#addDay').siblings().remove();
-     // for (i = currentDay+1; i > 0; i--){
-     //    $('#dayButtons').prepend('<button value="' + i + '"type="button" class="btn btn-default">' + i + '</button>');
-     // }
 
 });
 
-
-
-        // each day will have 3 keys that store arrays
-
-    // take all the data and store it in appropriate day
-
-    // wipe the itinearry clean 
-
-    // create a new button for each day
-
-        // wipe the itinerary and retrieve the appropriate itinerary
-
-        // repopulate the itinerary as well as map 
-
-
-
-// $('.selectorButton').click(function() {
-//     console.log($(this).siblings('select').val());
-//     // var selected = $(this).siblings('select').val());
-//     console.log(selected);
-
-//     var divToAppendTo = $(this).siblings('select').attr("name");
-    
-//     // console.log($('#hotelValue').val());
-//     $('th').append('<p class="list-group-item-text inline">' + selected + '</p>' + '<button type="button" class="btn btn-default">-</button>');
-// });
-
-
-// add click event handlers to the add buttons 
-
-// add click event handlers to the subtract buttons 
-
-// Add a day
-
-// Days should switch
-
-// Remove a day
-
-// add new markers to the map
-
-// when an empty day is clicked, it zooms out
-
-// when you add a new hotel/restaurant/things/, map zooms out to encompass all new listings
 
 
 

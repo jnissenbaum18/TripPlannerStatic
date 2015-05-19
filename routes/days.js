@@ -46,10 +46,9 @@ dayRouter.use('/:id', attractionRouter);
 // POST /days/:id/hotel
 attractionRouter.post('/hotel', function (req, res, next) {
     // creates a reference to the hotel
-    
-    model.Hotel.findOne({ name: req.body.ele}, function(err, foundHotel) {
+    model.Hotel.findOne({ name: req.body.element}, function(err, foundHotel) {
         model.Day.findOne({ _id: req.body._id}, function(err, foundDay) {
-            foundDay.hotel =  foundHotel._id;
+            foundDay.hotel = foundHotel._id;
             foundDay.save(function(err, savedDay) {
                 res.send(savedDay);
             });
@@ -64,7 +63,7 @@ attractionRouter.delete('/hotel', function (req, res, next) {
 // POST /days/:id/restaurants
 attractionRouter.post('/restaurants', function (req, res, next) {
     // creates a reference to a restaurant
-     model.Restaurant.findOne({ name: req.body.ele}, function(err, foundRest) {
+     model.Restaurant.findOne({ name: req.body.element}, function(err, foundRest) {
         model.Day.findOne({ _id: req.body._id}, function(err, foundDay) {
             foundDay.restaurants.push(foundRest._id);
             foundDay.save(function(err, savedDay) {
@@ -82,7 +81,7 @@ attractionRouter.delete('/restaurant/:id', function (req, res, next) {
 // POST /days/:id/thingsToDo
 attractionRouter.post('/thingsToDo', function (req, res, next) {
   
-    model.ThingToDo.findOne({ name: req.body.ele}, function(err, foundThing) {
+    model.ThingToDo.findOne({ name: req.body.element}, function(err, foundThing) {
         model.Day.findOne({ _id: req.body._id}, function(err, foundDay) {
             foundDay.thingsToDo.push(foundThing._id);
             foundDay.save(function(err, savedDay) {
